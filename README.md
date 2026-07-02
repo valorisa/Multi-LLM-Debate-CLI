@@ -18,6 +18,7 @@
 - [Understanding the five phases of a debate](#understanding-the-five-phases-of-a-debate)
 - [Reading the output files](#reading-the-output-files)
 - [All command-line options](#all-command-line-options)
+- [Building a rich brief with the interactive wizard](#building-a-rich-brief-with-the-interactive-wizard)
 - [Choosing your models wisely](#choosing-your-models-wisely)
 - [Adding a fourth model or provider](#adding-a-fourth-model-or-provider)
 - [Cost and rate-limit awareness](#cost-and-rate-limit-awareness)
@@ -252,6 +253,69 @@ Every run creates a folder (`debate_output/` by default, configurable with
 | `--max-retries` | no | `2` | How many times to ask a model to fix its answer if it doesn't follow the expected structure. |
 | `--output-dir` | no | `debate_output` | Where to save the result files. |
 | `--dry-run` | no | off | Simulate the whole run with fake answers, without calling any real API. |
+
+## Building a rich brief with the interactive wizard
+
+A good debate depends on a good brief. The `build_brief.py` script guides you through a series of questions to build a detailed `brief.txt` – without having to write it from scratch.
+
+**Basic usage** (interactive wizard):
+
+```bash
+python build_brief.py
+```
+
+You will be asked about:
+- the nature of your project,
+- its main objective,
+- target users,
+- constraints,
+- choices already made,
+- what you specifically want challenged,
+- known risks,
+- success criteria.
+
+Answers can be multi-line (empty line to finish). The script produces two files:
+- `brief.txt` – ready to be passed to `debate_cli.py --brief-file`
+- `brief.json` – raw answers, allowing you to reload and edit later.
+
+**Reuse a previous brief** (without re‑typing everything):
+
+```bash
+python build_brief.py --from-json brief.json --output my-new-brief.txt
+```
+
+**Enrich with an LLM** (optional, requires API keys and a `debate_cli.py` copy):
+
+```bash
+python build_brief.py --enrich --enrich-model glm
+```
+
+This sends your brief to a language model that rephrases and expands it into a denser, clearer text – without inventing facts. If the enriched version misses a mandatory section, the script keeps the original brief.
+
+**Chain directly into a debate** (one command, end‑to‑end):
+
+```bash
+python build_brief.py --then-debate --models glm,deepseek,qwen --judge glm
+```
+
+After you finish the wizard, the script automatically launches `debate_cli.py` with the generated brief. If the debate fails, you will see a clear error message.
+
+**All options for `build_brief.py`**:
+
+| Option | Default | Meaning |
+|--------|---------|---------|
+| `--output` | `brief.txt` | Output file for the final brief text. |
+| `--save-json` | `<output>.json` | Where to save raw answers as JSON. |
+| `--from-json` | – | Reload answers from a previous JSON file (skips wizard). |
+| `--enrich` | off | Enrich the brief using a language model. |
+| `--enrich-model` | `glm` | Model to use for enrichment (glm, deepseek, qwen). |
+| `--debate-cli-path` | `debate_cli.py` | Path to `debate_cli.py` (for enrichment and chaining). |
+| `--then-debate` | off | Automatically run `debate_cli.py` after building the brief. |
+| `--models` | `glm,deepseek,qwen` | Models to use if `--then-debate` is set. |
+| `--judge` | `glm` | Judge model for `--then-debate`. |
+| `--dry-run` | off | Pass `--dry-run` to `debate_cli.py` when chaining. |
+
+> **Tip**: keep `build_brief.py` in the same folder as `debate_cli.py` – it imports the routing logic for enrichment and chaining. If you move them, use `--debate-cli-path`.
 
 ## Choosing your models wisely
 
