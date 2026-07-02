@@ -1,0 +1,7 @@
+# Un seul de ces SDK est strictement nécessaire par modèle que tu comptes
+# utiliser réellement (glm -> zai, deepseek -> openai, qwen -> dashscope).
+# Installer les trois est le plus simple si tu veux les trois modèles.
+
+zai>=0.1.0
+openai>=1.0.0
+dashscope>=1.14.0

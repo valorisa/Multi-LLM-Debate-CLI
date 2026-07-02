@@ -1,0 +1,30 @@
+{
+  // Default state for all rules
+  "default": true,
+
+  // MD013 - Line length - Disabled (skills have long lines)
+  "MD013": false,
+
+  // MD033 - Inline HTML - Allow (useful for complex formatting)
+  "MD033": false,
+
+  // MD036 - Emphasis as heading - Disabled (intentional style with emojis)
+  "MD036": false,
+
+  // MD040 - Fenced code language - Disabled (many generic examples)
+  "MD040": false,
+
+  // MD041 - First line in file should be a top level heading - Allow
+  "MD041": false,
+
+  // MD046 - Code block style - Consistent but allow both fenced and indented
+  "MD046": {
+    "style": "consistent"
+  },
+
+  // MD024 - Multiple headings with same content - Allow (common in test/reference files)
+  "MD024": false,
+
+  // MD060 - Table column spacing - Disabled (cosmetic)
+  "MD060": false
+}

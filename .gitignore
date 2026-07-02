@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.local
+
+# Sorties générées par debate_cli.py
+debate_output/
+*_output/
+
+# Éditeurs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
