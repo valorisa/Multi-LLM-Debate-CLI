@@ -19,12 +19,13 @@
 - [Comprendre les cinq phases d'un débat](#comprendre-les-cinq-phases-dun-débat)
 - [Lire les fichiers de sortie](#lire-les-fichiers-de-sortie)
 - [Toutes les options en ligne de commande](#toutes-les-options-en-ligne-de-commande)
+- [Construire un brief enrichi avec l'assistant interactif](#construire-un-brief-enrichi-avec-lassistant-interactif)
 - [Bien choisir tes modèles](#bien-choisir-tes-modèles)
 - [Ajouter un quatrième modèle ou fournisseur](#ajouter-un-quatrième-modèle-ou-fournisseur)
 - [Coût et limites de débit](#coût-et-limites-de-débit)
 - [Dépannage](#dépannage)
 - [Questions fréquentes](#questions-fréquentes)
-- [Projet lié — la version "chat" de ce workflow](#projet-lié--la-version-chat-de-ce-workflow)
+- [Projet lié : la version "chat" de ce workflow](#projet-lié--la-version-chat-de-ce-workflow)
 - [Licence](#licence)
 
 ## Pourquoi cet outil existe
@@ -270,6 +271,69 @@ avec `--output-dir`) contenant :
 | `--output-dir` | non | `debate_output` | Où enregistrer les fichiers de résultat. |
 | `--dry-run` | non | désactivé | Simule l'ensemble de l'exécution avec des réponses factices, sans appeler de vraie API. |
 
+## Construire un brief enrichi avec l'assistant interactif
+
+Un bon débat repose sur un bon brief. Le script `build_brief.py` vous guide à travers une série de questions pour construire un `brief.txt` détaillé – sans avoir à le rédiger de zéro.
+
+**Utilisation de base** (assistant interactif) :
+
+```bash
+python build_brief.py
+```
+
+Vous serez interrogé sur :
+- la nature du projet,
+- son objectif principal,
+- les utilisateurs cibles,
+- les contraintes,
+- les choix déjà faits,
+- ce que vous voulez spécifiquement challenger,
+- les risques connus,
+- les critères de succès.
+
+Les réponses peuvent être multilignes (ligne vide pour terminer). Le script produit deux fichiers :
+- `brief.txt` – prêt à être passé à `debate_cli.py --brief-file`
+- `brief.json` – les réponses brutes, permettant de recharger et modifier ultérieurement.
+
+**Réutiliser un brief précédent** (sans tout retaper) :
+
+```bash
+python build_brief.py --from-json brief.json --output mon-nouveau-brief.txt
+```
+
+**Enrichir avec un LLM** (optionnel, nécessite des clés API et une copie de `debate_cli.py`) :
+
+```bash
+python build_brief.py --enrich --enrich-model glm
+```
+
+Cette option envoie votre brief à un modèle de langage qui le reformule et l’étoffe en un texte plus dense et plus clair – sans inventer de faits. Si la version enrichie manque une section obligatoire, le script conserve le brief original.
+
+**Enchaîner directement vers un débat** (une seule commande, de bout en bout) :
+
+```bash
+python build_brief.py --then-debate --models glm,deepseek,qwen --judge glm
+```
+
+Après avoir terminé l'assistant, le script lance automatiquement `debate_cli.py` avec le brief généré. Si le débat échoue, un message d'erreur explicite s'affiche.
+
+**Toutes les options de `build_brief.py`** :
+
+| Option | Défaut | Signification |
+|--------|--------|---------------|
+| `--output` | `brief.txt` | Fichier de sortie pour le brief final. |
+| `--save-json` | `<output>.json` | Où sauvegarder les réponses brutes en JSON. |
+| `--from-json` | – | Recharger les réponses d'un fichier JSON précédent (ignore l'assistant). |
+| `--enrich` | désactivé | Enrichir le brief via un LLM. |
+| `--enrich-model` | `glm` | Modèle pour l'enrichissement (glm, deepseek, qwen). |
+| `--debate-cli-path` | `debate_cli.py` | Chemin vers `debate_cli.py` (pour l'enrichissement et l'enchaînement). |
+| `--then-debate` | désactivé | Lancer automatiquement `debate_cli.py` après la construction du brief. |
+| `--models` | `glm,deepseek,qwen` | Modèles à utiliser si `--then-debate` est activé. |
+| `--judge` | `glm` | Modèle juge pour `--then-debate`. |
+| `--dry-run` | désactivé | Passer `--dry-run` à `debate_cli.py` lors de l'enchaînement. |
+
+> **Conseil** : gardez `build_brief.py` dans le même dossier que `debate_cli.py` – il importe la logique de routage pour l'enrichissement et l'enchaînement. Si vous les déplacez, utilisez `--debate-cli-path`.
+
 ## Bien choisir tes modèles
 
 Une bonne règle générale, inspirée des vraies pratiques de revue
@@ -371,7 +435,7 @@ copiant-collant entre onglets de navigateur — avec l'avantage supplémentaire
 que le format de chaque réponse est vérifié automatiquement et, si besoin,
 le modèle est invité à se corriger lui-même.
 
-## Projet lié — la version "chat" de ce workflow
+## Projet lié : la version "chat" de ce workflow
 
 Si tu ne veux pas configurer de clés API et préfères utiliser à la main les
 interfaces de chat web gratuites de GLM, DeepSeek, Claude, Qwen et
