@@ -282,6 +282,7 @@ python build_brief.py
 ```
 
 Vous serez interrogé sur :
+
 - la nature du projet,
 - son objectif principal,
 - les utilisateurs cibles,
@@ -292,6 +293,7 @@ Vous serez interrogé sur :
 - les critères de succès.
 
 Les réponses peuvent être multilignes (ligne vide pour terminer). Le script produit deux fichiers :
+
 - `brief.txt` – prêt à être passé à `debate_cli.py --brief-file`
 - `brief.json` – les réponses brutes, permettant de recharger et modifier ultérieurement.
 
