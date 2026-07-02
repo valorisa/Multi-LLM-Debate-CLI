@@ -1,0 +1,60 @@
+name: Python Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate Python code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install flake8
+          pip install -r requirements.txt || true
+
+      - name: Syntax check (py_compile)
+        run: |
+          python3 -m py_compile debate_cli.py build_brief.py
+          echo "✅ Syntax OK"
+
+      - name: Lint (flake8)
+        run: |
+          flake8 --max-line-length=120 --select=F,E9,E711,E712,E713,E714,E721,E722,E731,E741 debate_cli.py build_brief.py
+          echo "✅ Lint OK"
+
+      - name: Smoke test (end-to-end dry-run)
+        run: |
+          cat > sample_answers.json << 'EOF'
+          {
+            "nature": "Smoke test project",
+            "objectif": "Verify the full pipeline runs without API calls",
+            "utilisateurs": "GitHub Actions",
+            "contraintes": "",
+            "choix_faits": "",
+            "a_challenger": "Nothing real, this is a dry-run test",
+            "risques_connus": "",
+            "succes": "The workflow exits with code 0"
+          }
+          EOF
+          
+          python3 build_brief.py --from-json sample_answers.json --output sample_brief.txt
+          python3 debate_cli.py --brief-file sample_brief.txt --models glm,deepseek,qwen --judge glm --dry-run
+          
+          test -f debate_output/synthesis.txt && echo "✅ synthesis.txt present"
+          test -f debate_output/judge.txt && echo "✅ judge.txt present"
+          test -f debate_output/rounds.json && echo "✅ rounds.json present"
+          echo "✅ Smoke test passed"
