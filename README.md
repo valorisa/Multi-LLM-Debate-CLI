@@ -265,6 +265,7 @@ python build_brief.py
 ```
 
 You will be asked about:
+
 - the nature of your project,
 - its main objective,
 - target users,
@@ -275,6 +276,7 @@ You will be asked about:
 - success criteria.
 
 Answers can be multi-line (empty line to finish). The script produces two files:
+
 - `brief.txt` – ready to be passed to `debate_cli.py --brief-file`
 - `brief.json` – raw answers, allowing you to reload and edit later.
 
