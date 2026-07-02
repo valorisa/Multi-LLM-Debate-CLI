@@ -320,7 +320,7 @@ def main():
         cmd = [
             sys.executable, str(debate_cli_path),
             "--brief-file", str(output_path),
-            "--models", args.models,
+            "--models", ",".join(models_list),
             "--judge", args.judge,
         ]
         if args.dry_run:
