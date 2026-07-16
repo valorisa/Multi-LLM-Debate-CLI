@@ -3,5 +3,5 @@
 # Installer les trois est le plus simple si tu veux les trois modèles.
 
 zai>=0.1.0
-openai>=2.44.0
+openai>=2.45.0
 dashscope>=1.26.2
