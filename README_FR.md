@@ -118,7 +118,7 @@ d'information supplémentaire diminue généralement vite.
 - **Git**, pour télécharger (cloner) ce dépôt.
 - Des comptes et des clés API chez les fournisseurs d'IA que tu veux
   utiliser — au moins deux, idéalement trois. Ce projet gère nativement :
-  - **GLM** (via [Z.AI](https://www.z.ai))
+  - **GLM** (via [Z.AI](https://chat.z.ai))
   - **DeepSeek** (via la [plateforme DeepSeek](https://platform.deepseek.com))
   - **Qwen** (via [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com))
 
