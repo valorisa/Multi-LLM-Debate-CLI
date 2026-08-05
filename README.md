@@ -110,7 +110,7 @@ or four the extra insight you gain usually shrinks fast.
 - **Git**, to download (clone) this repository.
 - Accounts and API keys for the AI providers you want to use — at least two,
   ideally three. This project ships ready-to-use support for:
-  - **GLM** (via [Z.AI](https://www.z.ai))
+  - **GLM** (via [Z.AI](https://chat.z.ai))
   - **DeepSeek** (via the [DeepSeek platform](https://platform.deepseek.com))
   - **Qwen** (via [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com))
 
@@ -159,7 +159,7 @@ or four the extra insight you gain usually shrinks fast.
 You only need keys for the providers you actually plan to use.
 
 - **Z.AI (for GLM)**: create an account at
-  [z.ai](https://www.z.ai), then generate an API key from your account
+  [z.ai](https://chat.z.ai), then generate an API key from your account
   dashboard. Set it as `ZAI_API_KEY` in your `.env` file.
 - **DeepSeek**: create an account at
   [platform.deepseek.com](https://platform.deepseek.com), then generate an
