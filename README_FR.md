@@ -171,7 +171,7 @@ Tu n'as besoin de clés que pour les fournisseurs que tu comptes réellement
 utiliser.
 
 - **Z.AI (pour GLM)** : crée un compte sur
-  [z.ai](https://www.z.ai), puis génère une clé API depuis le tableau de
+  [z.ai](https://chat.z.ai), puis génère une clé API depuis le tableau de
   bord de ton compte. Renseigne-la comme `ZAI_API_KEY` dans ton fichier
   `.env`.
 - **DeepSeek** : crée un compte sur
