@@ -120,7 +120,7 @@ d'information supplémentaire diminue généralement vite.
   utiliser — au moins deux, idéalement trois. Ce projet gère nativement :
   - **GLM** (via [Z.AI](https://chat.z.ai))
   - **DeepSeek** (via la [plateforme DeepSeek](https://platform.deepseek.com))
-  - **Qwen** (via [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com))
+  - **Qwen** (via [Alibaba Cloud DashScope](https://www.alibabacloud.com/en?_p_lc=7))
 
 > **Remarque**
 > Tu n'as pas besoin des trois. Deux est le minimum strict accepté par
@@ -178,7 +178,7 @@ utiliser.
   [platform.deepseek.com](https://platform.deepseek.com), puis génère une
   clé API. Renseigne-la comme `DEEPSEEK_API_KEY` dans ton fichier `.env`.
 - **Qwen (DashScope)** : crée un compte sur
-  [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com), puis
+  [Alibaba Cloud DashScope](https://www.alibabacloud.com/en?_p_lc=7), puis
   génère une clé API. Renseigne-la comme `QWEN_API_KEY` dans ton fichier
   `.env`.
 
