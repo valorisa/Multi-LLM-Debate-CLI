@@ -112,7 +112,7 @@ or four the extra insight you gain usually shrinks fast.
   ideally three. This project ships ready-to-use support for:
   - **GLM** (via [Z.AI](https://chat.z.ai))
   - **DeepSeek** (via the [DeepSeek platform](https://platform.deepseek.com))
-  - **Qwen** (via [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com))
+  - **Qwen** (via [Alibaba Cloud DashScope](https://www.alibabacloud.com/en?_p_lc=7))
 
 > **Note**
 > You do not need all three. Two is the strict minimum the tool accepts, but
@@ -165,7 +165,7 @@ You only need keys for the providers you actually plan to use.
   [platform.deepseek.com](https://platform.deepseek.com), then generate an
   API key. Set it as `DEEPSEEK_API_KEY` in your `.env` file.
 - **Qwen (DashScope)**: create an account at
-  [Alibaba Cloud DashScope](https://dashscope.console.aliyun.com), then
+  [Alibaba Cloud DashScope](https://www.alibabacloud.com/en?_p_lc=7), then
   generate an API key. Set it as `QWEN_API_KEY` in your `.env` file.
 
 > **Security note**
