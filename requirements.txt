@@ -4,4 +4,4 @@
 
 zai>=0.1.0
 openai>=2.53.0
-dashscope>=1.26.6
+dashscope>=1.26.7
