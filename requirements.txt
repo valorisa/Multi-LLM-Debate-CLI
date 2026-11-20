@@ -4,4 +4,4 @@
 
 zai-sdk>=0.2.3
 openai>=3.46.0
-dashscope>=2.0.4
+dashscope>=2.1.0
