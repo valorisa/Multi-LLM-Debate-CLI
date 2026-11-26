@@ -3,5 +3,5 @@
 # Installer les trois est le plus simple si tu veux les trois modèles.
 
 zai-sdk>=0.2.3
-openai>=3.52.0
+openai>=3.57.0
 dashscope>=2.1.1
